@@ -286,46 +286,6 @@ nav.dark {
 }
 .g-item:hover .g-caption { opacity: 1; transform: translateY(0); }
 
-/* ── SCROLL CARDS (scroll-cards component — sticky category cards) ── */
-.sc-list { background: var(--bg); }
-.sc-wrap {
-  height: 100vh; display: flex; align-items: center;
-  justify-content: center; position: sticky; top: 0; padding: 0 1rem;
-}
-.sc-card {
-  position: relative; overflow: hidden;
-  width: 700px; max-width: min(700px, 100%); height: 400px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  padding: 3rem 2.5rem; box-shadow: 0 25px 70px rgba(0,0,0,0.6);
-}
-@media (max-width: 620px) { .sc-card { height: 300px; } }
-.sc-card-bg { position: absolute; inset: 0; z-index: 0; }
-.sc-card-bg img {
-  width: 100% !important; height: 100% !important;
-  object-fit: cover; opacity: 1 !important;
-}
-.sc-card-ov {
-  position: absolute; inset: 0; z-index: 1;
-  background: rgba(0,0,0,0.52);
-}
-.sc-card-tag {
-  position: relative; z-index: 2;
-  font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em;
-  text-transform: uppercase; color: var(--gold); margin-bottom: 0.65rem;
-}
-.sc-card-title {
-  position: relative; z-index: 2;
-  font-family: var(--f-display); font-size: clamp(2.5rem,7vw,5rem);
-  font-weight: 700; letter-spacing: -0.025em; line-height: 0.88;
-  text-align: center; color: #fff; text-transform: uppercase;
-}
-.sc-card-desc {
-  position: relative; z-index: 2;
-  font-size: clamp(0.85rem,1.4vw,1rem); color: rgba(255,255,255,0.82);
-  text-align: center; max-width: 36ch; line-height: 1.65;
-  margin-top: 0.85rem; font-style: italic;
-}
-
 /* ── MENU ── */
 .menu-sec { background: var(--bg); padding: 5rem 0; }
 .menu-head { text-align: center; margin-bottom: 3rem; }
@@ -704,53 +664,14 @@ footer { background: #070707; border-top: 1px solid rgba(212,175,55,0.12); paddi
 
 
 <!-- ═══ CARTE COMPLÈTE ═══ -->
-<section id="carte">
-
-  <!-- Scroll cards: category showcase (scroll-cards component — sticky parallax) -->
-  <div class="sc-list">
-
-    <div class="sc-wrap"><div class="sc-card">
-      <div class="sc-card-bg"><img src="mp3whn6d-13.05.2026_11.58.24_REC.png" alt="Entrées &amp; Dim Sum"></div>
-      <div class="sc-card-ov"></div>
-      <p class="sc-card-tag">01 — La Carte</p>
-      <h2 class="sc-card-title">Entrées<br>&amp; Dim Sum</h2>
-      <p class="sc-card-desc">Kimchi, nêms, raviolis vapeur, soupes pékinoises — une invitation à voyager dès les premières bouchées.</p>
-    </div></div>
-
-    <div class="sc-wrap"><div class="sc-card">
-      <div class="sc-card-bg"><img src="mp3whn7s-13.05.2026_11.58.35_REC.png" alt="Plats Sichuanais"></div>
-      <div class="sc-card-ov"></div>
-      <p class="sc-card-tag">02 — La Carte</p>
-      <h2 class="sc-card-title">Plats<br>Sichuanais</h2>
-      <p class="sc-card-desc">Bœuf, agneau, poulet et porc sautés aux épices du Sichuan — des saveurs puissantes et profondes.</p>
-    </div></div>
-
-    <div class="sc-wrap"><div class="sc-card">
-      <div class="sc-card-bg"><img src="mp3whn8p-13.05.2026_11.58.54_REC.png" alt="Nouilles &amp; Riz"></div>
-      <div class="sc-card-ov"></div>
-      <p class="sc-card-tag">03 — La Carte</p>
-      <h2 class="sc-card-title">Nouilles<br>&amp; Riz</h2>
-      <p class="sc-card-desc">Dandan, bobun, riz cantonais — chaque bol raconte une histoire de traditions culinaires millénaires.</p>
-    </div></div>
-
-    <div class="sc-wrap"><div class="sc-card">
-      <div class="sc-card-bg"><img src="mp3whna6-13.05.2026_11.59.29_REC.png" alt="Raviolis Maison"></div>
-      <div class="sc-card-ov"></div>
-      <p class="sc-card-tag">04 — La Carte</p>
-      <h2 class="sc-card-title">Raviolis<br>Maison</h2>
-      <p class="sc-card-desc">Pétris à la main, cuits vapeur ou grillés — fabriqués chaque matin selon les recettes transmises par le chef.</p>
-    </div></div>
-
-  </div>
-
-  <!-- Full tab menu -->
-  <div class="menu-sec">
-    <div class="container">
-      <div class="menu-head">
-        <p class="label">La Carte Complète</p>
-        <div class="rule c"></div>
-        <p class="sub" style="max-width:460px;margin:0 auto">Spécialités chinoises authentiques — du Sichuan aux dim sum maison, poissons frais et légumes de saison.</p>
-      </div>
+<section id="carte" class="menu-sec">
+  <div class="container">
+    <div class="menu-head">
+      <p class="label">La Carte Complète</p>
+      <h2 class="h2">Tous nos Plats</h2>
+      <div class="rule c"></div>
+      <p class="sub" style="max-width:460px;margin:0 auto">Spécialités chinoises authentiques — du Sichuan aux dim sum maison, poissons frais et légumes de saison.</p>
+    </div>
 
     <div class="menu-tabs" id="tabs">
       <button class="tab on" data-t="entrees">Entrées</button>
@@ -938,8 +859,7 @@ footer { background: #070707; border-top: 1px solid rgba(212,175,55,0.12); paddi
       </div>
     </div>
 
-    </div><!-- /container -->
-  </div><!-- /menu-sec -->
+  </div>
 </section>
 
 
