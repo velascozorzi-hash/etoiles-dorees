@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <style>
 :root {
   --bg:          #0A0A0A;
@@ -204,7 +206,44 @@ nav.dark {
 }
 .badge .stars { color: var(--gold); }
 
-/* ── GALLERY ── */
+/* ── FLOW ART GALLERY (story-scroll equivalent) ── */
+#flowGallery { width: 100%; overflow-x: hidden; }
+[data-flow-section] {
+  position: relative; min-height: 100vh; width: 100%; overflow: hidden;
+}
+.flow-art-container {
+  position: relative; min-height: 100vh; width: 100%;
+  display: flex; flex-direction: column; justify-content: space-between;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  padding: clamp(5rem,10vw,7rem) clamp(1.5rem,4vw,3.5rem) clamp(1.5rem,4vw,3rem);
+  transform-origin: bottom left; will-change: transform;
+}
+.flow-num {
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; opacity: 0.55;
+}
+.flow-hr { border: none; border-top: 1px solid currentColor; opacity: 0.2; margin: 0; }
+.flow-dish-name {
+  font-family: var(--f-display); font-size: clamp(3rem,9vw,11rem);
+  font-weight: 700; line-height: 0.88; letter-spacing: -0.025em;
+  text-transform: uppercase;
+}
+.flow-img-wrap {
+  flex: 1; overflow: hidden; border-radius: 3px;
+  min-height: 30vh; max-height: 48vh;
+}
+.flow-img-wrap img {
+  width: 100% !important; height: 100% !important;
+  object-fit: cover; opacity: 1 !important;
+  transition: transform 0.6s ease;
+}
+.flow-img-wrap:hover img { transform: scale(1.03); }
+.flow-desc {
+  font-size: clamp(0.88rem,1.6vw,1.15rem); opacity: 0.72;
+  line-height: 1.7; max-width: 52ch;
+}
+
+/* ── GALLERY (legacy, kept for CSS safety) ── */
 .gallery { background: var(--surface); padding: 4.5rem 0; }
 .gallery-head { text-align: center; margin-bottom: 2.8rem; }
 
@@ -538,32 +577,66 @@ footer { background: #070707; border-top: 1px solid rgba(212,175,55,0.12); paddi
 </section>
 
 
-<!-- ═══ GALLERY ═══ -->
-<section class="gallery" id="galerie">
-  <div class="gallery-head">
-    <p class="label">Nos Plats Signature</p>
-    <h2 class="h2"><span class="dish-rotate" id="dishRotate" aria-live="polite"></span></h2>
-    <div class="rule c"></div>
-  </div>
-  <div class="gallery-grid">
-    <div class="g-item">
-      <img src="mp3whn6d-13.05.2026_11.58.24_REC.png" alt="Marmite Sichuanaise">
-      <div class="g-caption">Marmite Sichuanaise</div>
+<!-- ═══ FLOW ART GALLERY ═══ -->
+<div id="flowGallery" aria-label="Nos plats signature">
+
+  <section data-flow-section id="galerie" aria-label="Marmite Sichuanaise">
+    <div class="flow-art-container" style="background:#0A0A0A;color:#F5EED8">
+      <p class="flow-num">01 — Nos Plats Signature</p>
+      <hr class="flow-hr">
+      <h2 class="flow-dish-name">Marmite<br>Sichuanaise</h2>
+      <hr class="flow-hr">
+      <div class="flow-img-wrap">
+        <img src="mp3whn6d-13.05.2026_11.58.24_REC.png" alt="Marmite Sichuanaise">
+      </div>
+      <hr class="flow-hr">
+      <p class="flow-desc">La spécialité de la maison. Épices du Sichuan, bouillon fumant, ingrédients d'exception — servis dans une marmite en fonte brûlante.</p>
     </div>
-    <div class="g-item">
-      <img src="mp3whn7s-13.05.2026_11.58.35_REC.png" alt="Bœuf Sauté aux Poivres">
-      <div class="g-caption">Bœuf Sauté aux Poivres</div>
+  </section>
+
+  <section data-flow-section aria-label="Bœuf Sauté aux Poivres">
+    <div class="flow-art-container" style="background:#C0392B;color:#fff">
+      <p class="flow-num">02 — Nos Plats Signature</p>
+      <hr class="flow-hr">
+      <h2 class="flow-dish-name">Bœuf<br>Sauté aux<br>Poivres</h2>
+      <hr class="flow-hr">
+      <div class="flow-img-wrap">
+        <img src="mp3whn7s-13.05.2026_11.58.35_REC.png" alt="Bœuf Sauté aux Poivres">
+      </div>
+      <hr class="flow-hr">
+      <p class="flow-desc">Bœuf tendre, poivres tricolores, sauce umami. Un classique revisité avec une touche sichuanaise qui réveille le palais.</p>
     </div>
-    <div class="g-item">
-      <img src="mp3whn8p-13.05.2026_11.58.54_REC.png" alt="Bobun Maison">
-      <div class="g-caption">Bobun Maison</div>
+  </section>
+
+  <section data-flow-section aria-label="Bobun Maison">
+    <div class="flow-art-container" style="background:#120C04;color:#F5EED8">
+      <p class="flow-num">03 — Nos Plats Signature</p>
+      <hr class="flow-hr">
+      <h2 class="flow-dish-name">Bobun<br>Maison</h2>
+      <hr class="flow-hr">
+      <div class="flow-img-wrap">
+        <img src="mp3whn8p-13.05.2026_11.58.54_REC.png" alt="Bobun Maison">
+      </div>
+      <hr class="flow-hr">
+      <p class="flow-desc">Fraîcheur et générosité dans un bol. Vermicelles, herbes fraîches, citron confit — au bœuf ou aux crevettes selon l'envie.</p>
     </div>
-    <div class="g-item">
-      <img src="mp3whna6-13.05.2026_11.59.29_REC.png" alt="Raviolis & Soupe du Chef">
-      <div class="g-caption">Raviolis &amp; Soupe du Chef</div>
+  </section>
+
+  <section data-flow-section aria-label="Raviolis et Soupe du Chef">
+    <div class="flow-art-container" style="background:#D4AF37;color:#100800">
+      <p class="flow-num">04 — Nos Plats Signature</p>
+      <hr class="flow-hr">
+      <h2 class="flow-dish-name">Raviolis<br>&amp; Soupe<br>du Chef</h2>
+      <hr class="flow-hr">
+      <div class="flow-img-wrap">
+        <img src="mp3whna6-13.05.2026_11.59.29_REC.png" alt="Raviolis & Soupe du Chef">
+      </div>
+      <hr class="flow-hr">
+      <p class="flow-desc">Raviolis pétris à la main, cuisson vapeur, bouillon maison infusé toute la nuit. Un savoir-faire transmis de génération en génération.</p>
     </div>
-  </div>
-</section>
+  </section>
+
+</div>
 
 
 <!-- ═══ CARTE COMPLÈTE ═══ -->
@@ -1135,6 +1208,55 @@ setTimeout(() => {
     if (img.complete && img.naturalWidth > 0) img.classList.add('vis');
   });
 }, 400);
+
+// ── FlowArt scroll animation (story-scroll / GSAP equivalent) ──
+(() => {
+  const gallery = document.getElementById('flowGallery');
+  if (!gallery || typeof gsap === 'undefined') return;
+
+  // Respect reduced-motion preference
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const sections = Array.from(gallery.querySelectorAll('[data-flow-section]'));
+  if (!sections.length) return;
+
+  sections.forEach((section, i) => {
+    gsap.set(section, { zIndex: i + 1 });
+
+    const inner = section.querySelector('.flow-art-container');
+    if (!inner) return;
+
+    // All sections except first rotate in from 30° (bottom-left origin)
+    if (i > 0) {
+      gsap.set(inner, { rotation: 30, transformOrigin: 'bottom left' });
+      gsap.to(inner, {
+        rotation: 0,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top bottom',
+          end: 'top 25%',
+          scrub: true,
+        },
+      });
+    }
+
+    // All sections except last get pinned while the next one scrolls over
+    if (i < sections.length - 1) {
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'bottom bottom',
+        end: 'bottom top',
+        pin: true,
+        pinSpacing: false,
+      });
+    }
+  });
+
+  ScrollTrigger.refresh();
+})();
 </script>
 
 </body>
