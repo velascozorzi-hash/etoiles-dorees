@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://etoiles-dorees.vercel.app/sitemap.xml
