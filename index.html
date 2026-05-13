@@ -213,10 +213,13 @@ nav.dark {
 }
 .flow-art-container {
   position: relative; min-height: 100vh; width: 100%;
-  display: flex; flex-direction: column; justify-content: space-between;
-  gap: clamp(0.75rem, 2vw, 1.5rem);
-  padding: clamp(5rem,10vw,7rem) clamp(1.5rem,4vw,3.5rem) clamp(1.5rem,4vw,3rem);
+  display: flex; flex-direction: column;
   transform-origin: bottom left; will-change: transform;
+}
+.flow-text {
+  display: flex; flex-direction: column; justify-content: space-between;
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  padding: clamp(5rem,10vw,7rem) clamp(1.5rem,4vw,3.5rem) clamp(1.5rem,4vw,3rem);
 }
 .flow-num {
   font-size: 0.68rem; font-weight: 600; letter-spacing: 0.2em;
@@ -224,22 +227,22 @@ nav.dark {
 }
 .flow-hr { border: none; border-top: 1px solid currentColor; opacity: 0.2; margin: 0; }
 .flow-dish-name {
-  font-family: var(--f-display); font-size: clamp(3rem,9vw,11rem);
+  font-family: var(--f-display); font-size: clamp(2.5rem,7vw,8rem);
   font-weight: 700; line-height: 0.88; letter-spacing: -0.025em;
   text-transform: uppercase;
 }
 .flow-img-wrap {
-  flex: 1; overflow: hidden; border-radius: 3px;
-  min-height: 30vh; max-height: 48vh;
+  flex: 1; overflow: hidden; position: relative; min-height: 45vh;
 }
 .flow-img-wrap img {
+  position: absolute; inset: 0;
   width: 100% !important; height: 100% !important;
   object-fit: cover; opacity: 1 !important;
   transition: transform 0.6s ease;
 }
 .flow-img-wrap:hover img { transform: scale(1.03); }
 .flow-desc {
-  font-size: clamp(0.88rem,1.6vw,1.15rem); opacity: 0.72;
+  font-size: clamp(0.88rem,1.4vw,1.05rem); opacity: 0.72;
   line-height: 1.7; max-width: 52ch;
 }
 
@@ -509,6 +512,17 @@ footer { background: #070707; border-top: 1px solid rgba(212,175,55,0.12); paddi
 .f-bottom p { font-size: 0.75rem; color: rgba(245,238,216,0.32); }
 .f-bottom a { color: var(--gold); }
 
+/* ── FLOW ART: desktop two-column (text left / image right) ── */
+@media (min-width: 768px) {
+  .flow-art-container { flex-direction: row; }
+  .flow-text {
+    flex: 0 0 44%; padding: 5rem 3.5rem 4rem;
+    justify-content: center; gap: 2rem;
+  }
+  .flow-dish-name { font-size: clamp(2.5rem, 5vw, 6rem); }
+  .flow-img-wrap { flex: 1; min-height: 100vh; }
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 960px) {
   .nav-links { display: none; }
@@ -606,57 +620,46 @@ footer { background: #070707; border-top: 1px solid rgba(212,175,55,0.12); paddi
 
   <section data-flow-section id="galerie" aria-label="Marmite Sichuanaise">
     <div class="flow-art-container" style="background:#0A0A0A;color:#F5EED8">
-      <p class="flow-num">01 — Nos Plats Signature</p>
-      <hr class="flow-hr">
-      <h2 class="flow-dish-name">Marmite<br>Sichuanaise</h2>
-      <hr class="flow-hr">
+      <div class="flow-text">
+        <p class="flow-num">01 — Nos Plats Signature</p>
+        <hr class="flow-hr">
+        <h2 class="flow-dish-name">Marmite<br>Sichuanaise</h2>
+        <hr class="flow-hr">
+        <p class="flow-desc">La spécialité de la maison. Épices du Sichuan, bouillon fumant, ingrédients d'exception — servis dans une marmite en fonte brûlante.</p>
+      </div>
       <div class="flow-img-wrap">
         <img src="mp3whn6d-13.05.2026_11.58.24_REC.png" alt="Marmite Sichuanaise">
       </div>
-      <hr class="flow-hr">
-      <p class="flow-desc">La spécialité de la maison. Épices du Sichuan, bouillon fumant, ingrédients d'exception — servis dans une marmite en fonte brûlante.</p>
     </div>
   </section>
 
   <section data-flow-section aria-label="Bœuf Sauté aux Poivres">
     <div class="flow-art-container" style="background:#C0392B;color:#fff">
-      <p class="flow-num">02 — Nos Plats Signature</p>
-      <hr class="flow-hr">
-      <h2 class="flow-dish-name">Bœuf<br>Sauté aux<br>Poivres</h2>
-      <hr class="flow-hr">
+      <div class="flow-text">
+        <p class="flow-num">02 — Nos Plats Signature</p>
+        <hr class="flow-hr">
+        <h2 class="flow-dish-name">Bœuf<br>Sauté aux<br>Poivres</h2>
+        <hr class="flow-hr">
+        <p class="flow-desc">Bœuf tendre, poivres tricolores, sauce umami. Un classique revisité avec une touche sichuanaise qui réveille le palais.</p>
+      </div>
       <div class="flow-img-wrap">
         <img src="mp3whn7s-13.05.2026_11.58.35_REC.png" alt="Bœuf Sauté aux Poivres">
       </div>
-      <hr class="flow-hr">
-      <p class="flow-desc">Bœuf tendre, poivres tricolores, sauce umami. Un classique revisité avec une touche sichuanaise qui réveille le palais.</p>
     </div>
   </section>
 
   <section data-flow-section aria-label="Bobun Maison">
     <div class="flow-art-container" style="background:#120C04;color:#F5EED8">
-      <p class="flow-num">03 — Nos Plats Signature</p>
-      <hr class="flow-hr">
-      <h2 class="flow-dish-name">Bobun<br>Maison</h2>
-      <hr class="flow-hr">
+      <div class="flow-text">
+        <p class="flow-num">03 — Nos Plats Signature</p>
+        <hr class="flow-hr">
+        <h2 class="flow-dish-name">Bobun<br>Maison</h2>
+        <hr class="flow-hr">
+        <p class="flow-desc">Fraîcheur et générosité dans un bol. Vermicelles, herbes fraîches, citron confit — au bœuf ou aux crevettes selon l'envie.</p>
+      </div>
       <div class="flow-img-wrap">
         <img src="mp3whn8p-13.05.2026_11.58.54_REC.png" alt="Bobun Maison">
       </div>
-      <hr class="flow-hr">
-      <p class="flow-desc">Fraîcheur et générosité dans un bol. Vermicelles, herbes fraîches, citron confit — au bœuf ou aux crevettes selon l'envie.</p>
-    </div>
-  </section>
-
-  <section data-flow-section aria-label="Raviolis et Soupe du Chef">
-    <div class="flow-art-container" style="background:#D4AF37;color:#100800">
-      <p class="flow-num">04 — Nos Plats Signature</p>
-      <hr class="flow-hr">
-      <h2 class="flow-dish-name">Raviolis<br>&amp; Soupe<br>du Chef</h2>
-      <hr class="flow-hr">
-      <div class="flow-img-wrap">
-        <img src="mp3whna6-13.05.2026_11.59.29_REC.png" alt="Raviolis & Soupe du Chef">
-      </div>
-      <hr class="flow-hr">
-      <p class="flow-desc">Raviolis pétris à la main, cuisson vapeur, bouillon maison infusé toute la nuit. Un savoir-faire transmis de génération en génération.</p>
     </div>
   </section>
 
