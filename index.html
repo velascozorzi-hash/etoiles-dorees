@@ -357,29 +357,50 @@ nav.dark {
 .di-n { font-size: 0.88rem; color: var(--fg); opacity: 0.88; flex: 1; line-height: 1.45; }
 .di-p { font-size: 0.84rem; font-weight: 600; color: var(--gold); white-space: nowrap; flex-shrink: 0; }
 
-/* ── SET MENUS ── */
+/* ── SET MENUS — editorial magazine layout ── */
 .set-sec { background: #120C04; padding: 5rem 0; }
-.cards-grid {
-  display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem;
-  margin-top: 2.5rem;
+.formules { margin-top: 3rem; }
+.formule-row {
+  display: grid;
+  grid-template-columns: 200px 1px 1fr;
+  gap: 0 3rem;
+  align-items: start;
+  padding: 3rem 0;
 }
-.card {
-  background: var(--bg); border: 1px solid rgba(212,175,55,0.2);
-  border-radius: 2px; padding: 2rem; position: relative; overflow: hidden;
+.formule-left {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem;
 }
-.card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, var(--red), var(--gold));
+.formule-num {
+  font-family: var(--f-display); font-size: 0.72rem; font-weight: 400;
+  letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); opacity: 0.65;
 }
-.card-icon { font-size: 1.6rem; margin-bottom: 1rem; }
-.card-name {
-  font-family: var(--f-display); font-size: 1.3rem; font-weight: 700;
-  color: var(--fg); margin-bottom: 0.4rem;
+.formule-price {
+  font-family: var(--f-display);
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 700; line-height: 0.88; letter-spacing: -0.03em;
+  color: var(--gold);
 }
-.card-price { font-size: 1.55rem; font-weight: 700; color: var(--gold); margin-bottom: 1.25rem; }
-.card-body { font-size: 0.86rem; color: var(--muted); line-height: 1.75; }
-.card-body b { color: rgba(245,238,216,0.68); font-weight: 600; }
-.card-body p + p { margin-top: 0.6rem; }
+.formule-divider-v {
+  background: linear-gradient(180deg, var(--red) 0%, var(--gold) 100%);
+  width: 1px; align-self: stretch; min-height: 90px; opacity: 0.6;
+}
+.formule-name {
+  font-family: var(--f-display); font-size: clamp(1.4rem, 2.8vw, 2rem);
+  font-weight: 700; letter-spacing: -0.02em; color: var(--fg); margin-bottom: 1.1rem;
+}
+.formule-tag {
+  font-size: 0.64rem; font-weight: 600; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--gold); opacity: 0.7; margin-top: 0.85rem;
+}
+.formule-tag:first-of-type { margin-top: 0; }
+.formule-detail {
+  font-size: 0.88rem; color: var(--muted); line-height: 1.72; margin-top: 0.28rem;
+}
+.formule-sep {
+  height: 1px;
+  background: linear-gradient(90deg, var(--red) 0%, var(--gold) 40%, transparent 100%);
+  opacity: 0.28;
+}
 
 /* ── DRINKS ── */
 .drinks-sec { background: var(--bg); padding: 5rem 0; }
@@ -540,7 +561,7 @@ footer { background: #070707; border-top: 1px solid rgba(212,175,55,0.12); paddi
   .g-item         { grid-row: span 1 !important; grid-column: span 1 !important; }
   .g-item img     { height: 230px !important; }
 
-  .cards-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+  .formule-row { grid-template-columns: 150px 1px 1fr; gap: 0 1.75rem; padding: 2.25rem 0; }
   .drinks-grid { grid-template-columns: 1fr 1fr; }
   .f-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
   .rev-grid { grid-template-columns: 1fr; gap: 1rem; }
@@ -561,7 +582,10 @@ footer { background: #070707; border-top: 1px solid rgba(212,175,55,0.12); paddi
   .drinks-grid { grid-template-columns: 1fr; }
   .f-grid { grid-template-columns: 1fr; gap: 2rem; }
   .f-bottom { flex-direction: column; text-align: center; }
-  .cards-grid { grid-template-columns: 1fr; }
+  .formule-row { grid-template-columns: 1fr; gap: 1rem 0; padding: 2rem 0; }
+  .formule-divider-v { display: none; }
+  .formule-price { font-size: clamp(2.2rem, 10vw, 3rem); }
+  .formule-left { flex-direction: row; align-items: baseline; gap: 0.9rem; margin-bottom: 0.5rem; }
 }
 </style>
 </head>
@@ -926,42 +950,60 @@ footer { background: #070707; border-top: 1px solid rgba(212,175,55,0.12); paddi
     <h2 class="h2">Nos Menus</h2>
     <div class="rule"></div>
     <p class="sub">Disponibles du lundi au vendredi à l'heure du déjeuner — service rapide garanti.</p>
-    <div class="cards-grid">
-      <div class="card">
-        <div class="card-icon">🥢</div>
-        <div class="card-name">Menu Galette</div>
-        <div class="card-price">15,90€</div>
-        <div class="card-body">
-          <p><b>Plat principal</b></p>
-          <p>Galette croustillante au porc ou bœuf</p>
-          <p><b>Accompagnement au choix</b></p>
-          <p>Soupe wonton aux crevettes (6p)<br>Soupe de nouilles au bœuf</p>
+
+    <div class="formules">
+
+      <div class="formule-row">
+        <div class="formule-left">
+          <span class="formule-num">I</span>
+          <span class="formule-price">15,90€</span>
+        </div>
+        <div class="formule-divider-v"></div>
+        <div class="formule-right">
+          <h3 class="formule-name">Menu Galette</h3>
+          <p class="formule-tag">Plat principal</p>
+          <p class="formule-detail">Galette croustillante au porc ou bœuf</p>
+          <p class="formule-tag">Accompagnement au choix</p>
+          <p class="formule-detail">Soupe wonton aux crevettes (6p) — Soupe de nouilles au bœuf</p>
         </div>
       </div>
-      <div class="card">
-        <div class="card-icon">🥢</div>
-        <div class="card-name">Menu Express 1</div>
-        <div class="card-price">15,90€</div>
-        <div class="card-body">
-          <p><b>Entrée au choix</b></p>
-          <p>Nêm poulet/porc (3p) · Raviolis crevettes (3p) · Potage pékinois</p>
-          <p><b>Plat au choix</b></p>
-          <p>Bœuf sauté aux poivres · Trois délices · Filet de poisson épicé · Poulet kung pao</p>
-          <p><b>Accompagnement au choix</b></p>
-          <p>Nouilles sautées · Riz cantonais · Riz nature</p>
+
+      <div class="formule-sep"></div>
+
+      <div class="formule-row">
+        <div class="formule-left">
+          <span class="formule-num">II</span>
+          <span class="formule-price">15,90€</span>
+        </div>
+        <div class="formule-divider-v"></div>
+        <div class="formule-right">
+          <h3 class="formule-name">Menu Express 1</h3>
+          <p class="formule-tag">Entrée au choix</p>
+          <p class="formule-detail">Nêm poulet/porc (3p) · Raviolis crevettes (3p) · Potage pékinois</p>
+          <p class="formule-tag">Plat au choix</p>
+          <p class="formule-detail">Bœuf sauté aux poivres · Trois délices · Filet de poisson épicé · Poulet kung pao</p>
+          <p class="formule-tag">Accompagnement au choix</p>
+          <p class="formule-detail">Nouilles sautées · Riz cantonais · Riz nature</p>
         </div>
       </div>
-      <div class="card">
-        <div class="card-icon">🥢</div>
-        <div class="card-name">Menu Express 2</div>
-        <div class="card-price">11,90€</div>
-        <div class="card-body">
-          <p><b>Plat au choix</b></p>
-          <p>Bœuf aux oignons · Légumes chop-suey · Ailes de poulet frit</p>
-          <p><b>Accompagnement</b></p>
-          <p>Riz nature</p>
+
+      <div class="formule-sep"></div>
+
+      <div class="formule-row">
+        <div class="formule-left">
+          <span class="formule-num">III</span>
+          <span class="formule-price">11,90€</span>
+        </div>
+        <div class="formule-divider-v"></div>
+        <div class="formule-right">
+          <h3 class="formule-name">Menu Express 2</h3>
+          <p class="formule-tag">Plat au choix</p>
+          <p class="formule-detail">Bœuf aux oignons · Légumes chop-suey · Ailes de poulet frit</p>
+          <p class="formule-tag">Accompagnement</p>
+          <p class="formule-detail">Riz nature</p>
         </div>
       </div>
+
     </div>
   </div>
 </section>
