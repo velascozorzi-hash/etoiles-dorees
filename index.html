@@ -195,7 +195,7 @@ nav.dark {
   font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--muted); margin-top: -2px;
 }
-.nav-links { display: flex; align-items: center; gap: 1.75rem; list-style: none; }
+.nav-links { display: flex; align-items: center; gap: 1.75rem; list-style: none; position: relative; }
 .nav-links a {
   font-size: 0.76rem; font-weight: 500; letter-spacing: 0.08em;
   text-transform: uppercase; color: var(--fg); opacity: 0.7;
@@ -207,6 +207,16 @@ nav.dark {
   padding: 0.45rem 1.1rem; border-radius: 2px; transition: background 0.2s;
 }
 .nav-links .cta:hover { background: var(--red-h) !important; }
+.nav-links li:not(.nav-cursor) { position: relative; z-index: 1; }
+.nav-cursor {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  height: 28px; border-radius: 100px; pointer-events: none;
+  background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.28);
+  opacity: 0; z-index: 0;
+  transition: left 0.22s cubic-bezier(0.4,0,0.2,1),
+              width 0.22s cubic-bezier(0.4,0,0.2,1),
+              opacity 0.18s ease;
+}
 
 .hamburger {
   display: none; flex-direction: column; gap: 5px; cursor: pointer;
@@ -1207,6 +1217,26 @@ footer { background: #070707; border-top: 1px solid rgba(212,175,55,0.12); paddi
 
 
 <script>
+// Nav sliding cursor (NavHeader pill effect)
+(() => {
+  const links = document.querySelector('.nav-links');
+  if (!links) return;
+  const cursor = document.createElement('li');
+  cursor.className = 'nav-cursor';
+  links.appendChild(cursor);
+  const items = Array.from(links.querySelectorAll('li:not(.nav-cursor)')).filter(
+    li => !li.querySelector('.cta')
+  );
+  items.forEach(li => {
+    li.addEventListener('mouseenter', () => {
+      cursor.style.width  = li.offsetWidth  + 'px';
+      cursor.style.left   = li.offsetLeft   + 'px';
+      cursor.style.opacity = '1';
+    });
+  });
+  links.addEventListener('mouseleave', () => { cursor.style.opacity = '0'; });
+})();
+
 // Nav scroll
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
